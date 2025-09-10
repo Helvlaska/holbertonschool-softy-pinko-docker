@@ -1,12 +1,10 @@
-version: '3.9'   # Version de la syntaxe Docker Compose
-
 services:        # Définition des services (chaque conteneur = 1 service)
 
   backend:       # Service du back-end (Flask)
     build:
       context: ./back-end   # Dossier contenant le Dockerfile du back-end
       dockerfile: Dockerfile
-    container_name: backend_container   # Nom du conteneur (optionnel)
+    image: softy-pinko-back-end:task4  # Nom attribué à l’image construite
     ports:
       - "5252:5252"   # Port hôte:port conteneur → API dispo sur http://localhost:5252
 
@@ -14,7 +12,7 @@ services:        # Définition des services (chaque conteneur = 1 service)
     build:
       context: ./front-end   # Dossier contenant le Dockerfile du front-end
       dockerfile: Dockerfile
-    container_name: frontend_container
+    image: softy-pinko-front-end:task4  # Nom attribué à l’image construite
     ports:
       - "9000:9000"   # Front accessible sur http://localhost:9000
     depends_on:       # Le front attend que le back démarre avant de se lancer
