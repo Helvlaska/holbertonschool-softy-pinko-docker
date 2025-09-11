@@ -1,0 +1,30 @@
+services:        # Définition des services (chaque conteneur = 1 service)
+
+  backend:       # Service du back-end (Flask)
+    build:
+      context: ./back-end   # Dossier contenant le Dockerfile du back-end
+      dockerfile: Dockerfile
+    image: softy-pinko-back-end:task4  # Nom attribué à l’image construite
+    ports:
+      - "5252:5252"   # Port hôte:port conteneur → API dispo sur http://localhost:5252
+
+  frontend:      # Service du front-end (Nginx)
+    build:
+      context: ./front-end   # Dossier contenant le Dockerfile du front-end
+      dockerfile: Dockerfile
+    image: softy-pinko-front-end:task4  # Nom attribué à l’image construite
+    ports:
+      - "9000:9000"   # Front accessible sur http://localhost:9000
+    depends_on:       # Le front attend que le back démarre avant de se lancer
+      - backend
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    image: proxy-image
+    ports:
+      - "80:80"   # Le proxy sera dispo sur http://localhost
+    depends_on:
+      - frontend
+      - backend
