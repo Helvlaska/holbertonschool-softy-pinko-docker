@@ -1,5 +1,5 @@
 # Basé sur la dernière version de Ubuntu
-FROM ubuntu:24.04
+FROM ubuntu:latest
 
 # Mise à jour APT
 RUN apt-get update

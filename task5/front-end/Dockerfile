@@ -1,5 +1,5 @@
 # Utilisation de la dernière version de nginx
-FROM nginx:1.28.0
+FROM nginx:latest
 
 # Copier les fichiers/dossiers de l'hôte vers l'image
 COPY ./softy-pinko-front-end /var/www/html/softy-pinko-front-end
